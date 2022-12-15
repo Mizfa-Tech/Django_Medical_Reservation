@@ -9,13 +9,13 @@ class Session(DateBasic):
         verbose_name_plural = _('وقت ها')
         
     class Status(models.TextChoices):
-        SET = 'SET'
-        DONE = 'DONE'
-        ABSENT = 'ABSENT'
+        SET = 'SET' , _('ثبت شده')
+        DONE = 'DONE', _('جلسه انجام شد')
+        ABSENT = 'ABSENT', _('نیامد')
         
     patient = models.ForeignKey('mediuser.CustomUser', on_delete=models.CASCADE, verbose_name=_('بیمار'), related_name="ses_patient")
     datetime = jmodels.jDateTimeField(verbose_name=_('زمان و تاریخ وقت'), null=True, blank=True)
-    status = models.CharField(_("وضعیت"), max_length=50, default='SET', choices=Status.choices)
+    status = models.CharField(_("وضعیت"), max_length=50, default='ثبت شده', choices=Status.choices)
     fee = models.IntegerField(_("هزینه ویزیت به تومان"), default=85000)
     
 class Prescription(DateBasic):
